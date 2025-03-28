@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body class="blue lighten-5">
+    <div class="container">
+        <h3 class="center-align">URL Shortener</h3>
+        
+        <form action="/" method="POST">
+            <div class="input-field">
+                <input type="url" name="long_url" id="long_url" required>
+                <label for="long_url">Enter Long URL</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">Shorten URL</button>
+        </form>
+
+        {% if short_url %}
+        <div class="card-panel teal lighten-2 center-align">
+            <h5>Shortened URL:</h5>
+            <a href="{{ short_url }}" target="_blank" class="white-text">{{ short_url }}</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

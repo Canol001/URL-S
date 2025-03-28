@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 400px;
+            width: 90%;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            width: 100%;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="center-align">Sign Up</h3>
+
+        <form method="post">
+            <div class="input-field">
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <button type="submit" class="btn blue waves-effect waves-light">
+                Sign Up
+            </button>
+            
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <h4>Notification</h4>
+            <p id="modalMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var modal = document.getElementById("messageModal");
+            var instance = M.Modal.init(modal);
+
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    var message = "";
+                    {% for category, message in messages %}
+                        message += "{{ message }}<br>";
+                    {% endfor %}
+                    document.getElementById("modalMessage").innerHTML = message;
+                    instance.open();
+                {% endif %}
+            {% endwith %}
+        });
+    </script>
+</body>
+</html>
